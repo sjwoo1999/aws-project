@@ -1,0 +1,30 @@
+/* Design tokens and minimal utility classes that don't conflict with Tailwind v4 */
+
+:root {
+	--color-primary: #F76241;
+	/* Darker variant to meet AA contrast with white text */
+	--color-primary-strong: #d6492b;
+	--radius-xl: 1rem;
+	--radius-2xl: 1.25rem;
+}
+
+/* Temporary button styles (prefer Tailwind utilities; keep small surface) */
+.btn {
+	@apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[var(--radius-xl)] transition-colors duration-150 text-sm font-medium;
+}
+
+.btn-primary {
+	@apply text-white font-medium;
+	background-color: var(--color-primary-strong);
+}
+
+.btn-primary:hover {
+	filter: brightness(0.95);
+}
+
+.btn-primary:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+
