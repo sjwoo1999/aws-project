@@ -4,17 +4,31 @@ import { materials } from "@data/mock";
 import { useParams } from "next/navigation";
 import { formatDate } from "@/../lib/format";
 
-const filters = {
-	weeks: ["주차 01", "주차 02", "주차 03", "주차 04"],
-	types: ["노트", "슬라이드", "실습", "FAQ"],
-	topics: ["선형대수", "회귀", "최적화"],
-};
+function deriveFilters(titles: string[], types: string[]) {
+    const weekRegex = /(주차\s*\d{1,2})/;
+    const weeks = Array.from(new Set(
+        titles.map((t) => (t.match(weekRegex)?.[1] ?? null)).filter(Boolean) as string[]
+    ));
+    const derivedTopics = Array.from(new Set(
+        titles.map((t) => {
+            const parts = t.split("—");
+            const after = (parts[1] ?? parts[0]).trim();
+            return (after.split(" ")[0] || after).trim();
+        })
+    ));
+    return {
+        weeks,
+        types: Array.from(new Set(types)),
+        topics: derivedTopics,
+    };
+}
 
 // removed local items; use mock data
 
 export default function MaterialsPage() {
     const { courseId } = useParams<{ courseId: string }>();
     const itemsForCourse = materials.filter(m => m.courseId === courseId);
+    const derived = deriveFilters(itemsForCourse.map(m => m.title), itemsForCourse.map(m => m.type));
     return (
         <div className="space-y-6">
 			<header>
@@ -22,9 +36,9 @@ export default function MaterialsPage() {
 				<p className="text-sm text-slate-500">필터는 UI만 동작합니다</p>
 			</header>
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-				<Select label="주차" options={filters.weeks} />
-				<Select label="유형" options={filters.types} />
-				<Select label="토픽" options={filters.topics} />
+                <Select label="주차" options={derived.weeks} />
+                <Select label="유형" options={derived.types} />
+                <Select label="토픽" options={derived.topics} />
 			</div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

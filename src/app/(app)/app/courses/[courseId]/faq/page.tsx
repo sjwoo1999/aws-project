@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { Tabs as UITabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { faqClusters } from "@data/mock";
 
 type Tab = "concept" | "code" | "math";
@@ -19,8 +20,14 @@ export default function FAQPage() {
 		<div className="space-y-6">
 			<header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 				<h1 className="text-lg sm:text-xl font-semibold text-slate-900">FAQ</h1>
-				<div className="flex items-center gap-3">
-					<Tabs value={tab} onChange={setTab} />
+                <div className="flex items-center gap-3">
+                    <UITabs value={tab} onValueChange={(v) => setTab(v as Tab)}>
+                        <TabsList>
+                            <TabsTrigger value="concept">개념</TabsTrigger>
+                            <TabsTrigger value="code">코드</TabsTrigger>
+                            <TabsTrigger value="math">수식</TabsTrigger>
+                        </TabsList>
+                    </UITabs>
 					<label className="inline-flex items-center gap-2 text-sm">
 						<span className="text-slate-600">정렬</span>
 						<select value={sort} onChange={(e) => setSort(e.target.value)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]">

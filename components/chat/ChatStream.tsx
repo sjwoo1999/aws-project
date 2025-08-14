@@ -1,6 +1,7 @@
 "use client";
 
 import { useChatStore } from "../../store/chat";
+import { conversations } from "@data/mock";
 
 type Message = {
 	id: string;
@@ -8,27 +9,20 @@ type Message = {
 	content: string;
 };
 
-const DUMMY: Message[] = [
-	{ id: "m1", role: "user", content: "주차 3 선형대수 핵심 개념을 요약해줘" },
-	{
-		id: "m2",
-		role: "assistant",
-		content:
-			"선형대수 주차 3의 핵심은 벡터공간, 선형결합, 기저와 차원입니다. 예시와 함께 간단히 설명드릴게요.",
-	},
-	{
-		id: "m3",
-		role: "assistant",
-		content: "A x = b 형태의 해 존재성과 기저 변경의 의미도 다룹니다.",
-	},
-];
-
-export default function ChatStream() {
+export default function ChatStream({ courseId }: { courseId?: string }) {
 	const { toggleCitationsPanel } = useChatStore();
+
+	const selected = courseId ? conversations.find((c) => c.courseId === courseId) : undefined;
+	const messages: Message[] = selected
+		? selected.messages.map((m) => ({ id: m.id, role: m.role, content: m.content }))
+		: [
+			{ id: "m1", role: "user", content: "이 과목 핵심 개념을 요약해줘" },
+			{ id: "m2", role: "assistant", content: "핵심 토픽과 예시 중심으로 정리해 드릴게요." },
+		];
 
 	return (
 		<div className="space-y-4">
-			{DUMMY.map((m) => (
+			{messages.map((m) => (
 				<div key={m.id} className="flex">
 					<div className={`max-w-full sm:max-w-3xl rounded-2xl px-4 py-3 border ${m.role === "assistant" ? "bg-white border-slate-200" : "bg-[var(--color-primary)]/5 border-[var(--color-primary)]/20"}`}>
 						<p className={m.role === "assistant" ? "text-slate-800" : "text-slate-800"}>{m.content}</p>
