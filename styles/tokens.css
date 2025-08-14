@@ -1,9 +1,12 @@
 /* Design tokens and minimal utility classes that don't conflict with Tailwind v4 */
 
 :root {
-	--color-primary: #F76241;
+	/* Korea University brand */
+	--ku-crimson: #dc143c;
 	/* Darker variant to meet AA contrast with white text */
-	--color-primary-strong: #d6492b;
+	--ku-crimson-strong: #b01030;
+	--color-primary: var(--ku-crimson);
+	--color-primary-strong: var(--ku-crimson-strong);
 	--radius-xl: 1rem;
 	--radius-2xl: 1.25rem;
 }
