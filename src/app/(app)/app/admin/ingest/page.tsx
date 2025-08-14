@@ -1,5 +1,5 @@
-import UploadPane from "../../../../../components/admin/UploadPane";
-import IndexStatus from "../../../../../components/admin/IndexStatus";
+import UploadPane from "@components/admin/UploadPane";
+import IndexStatus from "@components/admin/IndexStatus";
 
 export default function IngestPage() {
 	return (

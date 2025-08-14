@@ -1,9 +1,9 @@
 "use client";
 
-import TopBar from "@/components/shared/TopBar";
-import AppSidebar from "@/components/shared/AppSidebar";
+import TopBar from "@components/shared/TopBar";
+import AppSidebar from "@components/shared/AppSidebar";
 import { useEffect, useRef } from "react";
-import { useUIStore } from "@/store/ui";
+import { useUIStore } from "@store/ui";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
 	return (

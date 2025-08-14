@@ -1,10 +1,10 @@
 "use client";
 
-import PresetSwitch from "../../../../../../components/chat/PresetSwitch";
-import TopicChips from "../../../../../../components/chat/TopicChips";
-import ChatStream from "../../../../../../components/chat/ChatStream";
-import InputBar from "../../../../../../components/chat/InputBar";
-import CitationsPanel from "../../../../../../components/shared/CitationsPanel";
+import PresetSwitch from "@components/chat/PresetSwitch";
+import TopicChips from "@components/chat/TopicChips";
+import ChatStream from "@components/chat/ChatStream";
+import InputBar from "@components/chat/InputBar";
+import CitationsPanel from "@components/shared/CitationsPanel";
 
 export default function ChatPage() {
 	const topics = ["주차 01", "주차 02", "주차 03", "기말 대비", "과제 2"];

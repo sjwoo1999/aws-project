@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import SectionCard from "../../../../../components/shared/SectionCard";
+import SectionCard from "@components/shared/SectionCard";
 
 export default function CourseOverviewPage() {
 	return (
