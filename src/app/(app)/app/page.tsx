@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 export default function AppHome() {
-	return null;
+	redirect("/app/courses");
 }
 
 

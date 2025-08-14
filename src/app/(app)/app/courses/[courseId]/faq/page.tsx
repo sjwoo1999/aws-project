@@ -1,18 +1,19 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import { faqClusters } from "@data/mock";
 
 type Tab = "concept" | "code" | "math";
 
-const items = [
-	{ id: "q1", title: "숙제 2 제출 규칙", summary: "제출 포맷과 마감 관련 안내", views: 231, sources: 3 },
-	{ id: "q2", title: "행렬 미분 규칙", summary: "기본 미분 규칙과 예시", views: 180, sources: 2 },
-	{ id: "q3", title: "PyTorch 텐서 브로드캐스팅", summary: "브로드캐스팅 규칙 설명", views: 90, sources: 1 },
-];
+// items now computed from mock by courseId and tab
 
 export default function FAQPage() {
-	const [tab, setTab] = useState<Tab>("concept");
-	const [sort, setSort] = useState("views");
+    const { courseId } = useParams<{ courseId: string }>();
+    const [tab, setTab] = useState<Tab>("concept");
+    const [sort, setSort] = useState("views");
+    const cluster = faqClusters.find(c => c.courseId === courseId && c.category === tab);
+    const items = (cluster?.items ?? []).slice().sort((a, b) => sort === "views" ? b.views - a.views : 0);
 
 	return (
 		<div className="space-y-6">
@@ -29,9 +30,9 @@ export default function FAQPage() {
 					</label>
 				</div>
 			</header>
-			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-				{items.map((it) => (
-					<Link key={it.id} href={`/app/courses/123/faq/${it.id}`} className="rounded-2xl border border-slate-200 bg-white p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {items.map((it) => (
+                    <Link key={it.id} href={`/app/courses/${courseId}/faq/${it.id}`} className="rounded-2xl border border-slate-200 bg-white p-4">
 						<h3 className="text-sm font-semibold text-slate-900">{it.title}</h3>
 						<p className="mt-1 text-sm text-slate-600">{it.summary}</p>
 						<div className="mt-3 text-xs text-slate-500">조회수 {it.views} · 출처 {it.sources}</div>
