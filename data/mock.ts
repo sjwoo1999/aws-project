@@ -1,4 +1,4 @@
-import { Course, Material, Conversation, Citation, FAQCluster } from "../types/app";
+import { Course, Material, Conversation, Citation, FAQCluster, CourseUpdate, SavedItem, AdminKPI, AdminMonthlyCost } from "../types/app";
 
 export const courses: Course[] = [
 	{ id: "c-algo", slug: "algorithms", name: "알고리즘", description: "알고리즘 설계와 분석" },
@@ -121,6 +121,31 @@ export const faqClusters: FAQCluster[] = [
 			{ id: "q-cc-2", title: "IR의 역할", summary: "최적화/타깃 독립성", views: 156, sources: 1 },
 		],
 	},
+];
+
+export const updates: CourseUpdate[] = [
+	{ id: "u-algo-1", courseId: "c-algo", date: new Date().toISOString(), version: "v1.2", summary: "탐욕법 슬라이드 보완" },
+	{ id: "u-ds-1", courseId: "c-ds", date: new Date().toISOString(), version: "v1.1", summary: "해시 슬라이드 오탈자 수정" },
+	{ id: "u-os-1", courseId: "c-os", date: new Date().toISOString(), version: "v1.0", summary: "초기 배포" },
+];
+
+export const saved: SavedItem[] = [
+	{ id: "s1", courseId: "c-algo", kind: "material", title: "분할정복 노트", link: "/app/courses/c-algo/materials/m-algo-1" },
+	{ id: "s2", courseId: "c-ds", kind: "faq", title: "배열 vs 연결리스트", link: "/app/courses/c-ds/faq/q-ds-1" },
+];
+
+export const adminKPI: AdminKPI = {
+	totalFiles: 128,
+	totalTokens: 1_250_000,
+	avgLatencyMs: 730,
+	failures: 2,
+};
+
+export const adminMonthlyCosts: AdminMonthlyCost[] = [
+	{ month: "2025-02", provider: "bedrock", amountUsd: 42.5 },
+	{ month: "2025-02", provider: "openai", amountUsd: 68.2 },
+	{ month: "2025-02", provider: "anthropic", amountUsd: 31.8 },
+	{ month: "2025-02", provider: "others", amountUsd: 10.0 },
 ];
 
 

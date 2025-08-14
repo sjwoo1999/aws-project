@@ -69,4 +69,33 @@ export interface FAQCluster {
 	items: FAQItemSummary[];
 }
 
+export interface CourseUpdate {
+	id: ID;
+	courseId: ID;
+	date: string; // ISO
+	version: string;
+	summary: string;
+}
+
+export interface SavedItem {
+	id: ID;
+	courseId: ID;
+	kind: "material" | "faq";
+	title: string;
+	link: string;
+}
+
+export interface AdminKPI {
+	totalFiles: number;
+	totalTokens: number;
+	avgLatencyMs: number;
+	failures: number;
+}
+
+export interface AdminMonthlyCost {
+	month: string; // YYYY-MM
+	provider: "bedrock" | "openai" | "anthropic" | "others";
+	amountUsd: number;
+}
+
 
